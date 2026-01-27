@@ -1,0 +1,1918 @@
+<!doctype html>
+<!-- ABOUTME: Internal strategy alignment deck for Synthyra team. -->
+<!-- ABOUTME: Covers product, positioning, gaps, validation, and raise. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Synthyra Strategy Alignment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --brand-ink: #1a1a2e;
+        --brand-ink-soft: #2d2d44;
+        --brand-paper: #fafbfc;
+        --brand-paper-deep: #f0f2f5;
+        --brand-accent: #ed8936;
+        --brand-accent-strong: #dd6b20;
+        --brand-sage: #00b5d8;
+        --brand-slate: #4a5568;
+        --brand-line: rgba(26, 26, 46, 0.12);
+        --brand-glow: rgba(237, 137, 54, 0.35);
+        --brand-success: #38a169;
+        --brand-danger: #e53e3e;
+        --brand-warning: #d69e2e;
+        --brand-purple: #805ad5;
+        --font-display: "Inter", "Helvetica Neue", sans-serif;
+        --font-body: "Inter", "Helvetica Neue", sans-serif;
+        --slide-radius: 24px;
+        --slide-shadow: 0 20px 50px rgba(26, 26, 46, 0.15);
+        --slide-border: 1px solid rgba(26, 26, 46, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: var(--font-body);
+        color: var(--brand-ink);
+        background:
+          radial-gradient(circle at 10% 15%, rgba(237, 137, 54, 0.08), transparent 50%),
+          radial-gradient(circle at 90% 85%, rgba(0, 181, 216, 0.08), transparent 50%),
+          linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6vh 4vw 10vh;
+      }
+
+      .deck {
+        position: relative;
+        width: min(1200px, 92vw);
+        height: min(720px, 72vh);
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transform: translateY(12px) scale(0.985);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        pointer-events: none;
+      }
+
+      .slide.is-active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .slide-inner {
+        height: 100%;
+        background: var(--brand-paper);
+        border-radius: var(--slide-radius);
+        box-shadow: var(--slide-shadow);
+        border: var(--slide-border);
+        padding: clamp(24px, 3.5vw, 48px);
+        padding-bottom: clamp(48px, 5vh, 72px);
+        display: grid;
+        gap: clamp(12px, 1.8vh, 20px);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .theme-ink .slide-inner {
+        background: #1a1a2e;
+        color: #fafbfc;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .layout-title { align-content: center; }
+      .layout-split { grid-template-columns: 1fr 1fr; align-items: start; gap: clamp(20px, 2.5vw, 40px); }
+      .layout-stack { grid-template-rows: auto 1fr; align-content: start; }
+      .layout-thirds { grid-template-columns: repeat(3, 1fr); gap: 16px; align-content: start; }
+      .layout-hero { grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+
+      .logo { height: 40px; width: auto; max-width: 160px; }
+
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--brand-accent);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+      }
+
+      .eyebrow::after {
+        content: "";
+        width: 34px;
+        height: 2px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--brand-accent), var(--brand-sage));
+        transform-origin: left center;
+        animation: eyebrow-sweep 3.6s ease-in-out infinite;
+      }
+
+      .theme-ink .eyebrow::after { background: linear-gradient(90deg, var(--brand-accent), #7dd3fc); }
+
+      @keyframes eyebrow-sweep {
+        0% { transform: scaleX(0.35); opacity: 0.55; }
+        50% { transform: scaleX(1); opacity: 1; }
+        100% { transform: scaleX(0.45); opacity: 0.7; }
+      }
+
+      .title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        line-height: 1.1;
+        margin: 0;
+        font-weight: 700;
+      }
+
+      .title-hero {
+        font-size: clamp(2.4rem, 4.2vw, 3.7rem);
+        letter-spacing: -0.01em;
+      }
+
+      .title-emphasis {
+        color: var(--brand-accent-strong);
+      }
+
+      .subtitle {
+        font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+        line-height: 1.5;
+        margin: 0;
+        color: var(--brand-slate);
+        max-width: 75%;
+      }
+
+      .theme-ink .subtitle { color: rgba(250, 251, 252, 0.8); }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+        margin: 0;
+        font-weight: 700;
+      }
+
+      .body-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--brand-slate);
+      }
+
+      .theme-ink .body-text { color: rgba(250, 251, 252, 0.78); }
+
+      .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+      .chip {
+        padding: 5px 11px;
+        border-radius: 999px;
+        border: 1px solid var(--brand-line);
+        font-size: 0.75rem;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .chip.accent { background: var(--brand-accent); color: white; border-color: var(--brand-accent); }
+      .chip.sage { background: var(--brand-sage); color: white; border-color: var(--brand-sage); }
+      .chip.purple { background: var(--brand-purple); color: white; border-color: var(--brand-purple); }
+      .chip.muted { background: var(--brand-paper-deep); color: var(--brand-slate); }
+      .chip.warning { background: var(--brand-warning); color: white; border-color: var(--brand-warning); }
+      .theme-ink .chip { background: rgba(255, 255, 255, 0.08); }
+
+      .hero-media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .hero-media-frame {
+        width: 100%;
+        max-width: 460px;
+        aspect-ratio: 4 / 3;
+        border-radius: 18px;
+        background: linear-gradient(140deg, rgba(0, 181, 216, 0.12), rgba(237, 137, 54, 0.08));
+        border: 1px solid rgba(0, 181, 216, 0.2);
+        box-shadow: 0 18px 40px rgba(26, 26, 46, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .hero-video,
+      .hero-media-frame svg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+      }
+
+      .nano-banana-strip {
+        position: absolute;
+        left: clamp(24px, 3.5vw, 48px);
+        right: clamp(24px, 3.5vw, 48px);
+        bottom: clamp(54px, 6vh, 84px);
+        height: clamp(60px, 9vh, 90px);
+        width: auto;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 181, 216, 0.2);
+        background: linear-gradient(90deg, rgba(0, 181, 216, 0.12), rgba(237, 137, 54, 0.12));
+        object-fit: cover;
+        box-shadow: 0 12px 28px rgba(26, 26, 46, 0.12);
+      }
+
+      .theme-ink .nano-banana-strip {
+        border-color: rgba(255, 255, 255, 0.18);
+        background: linear-gradient(90deg, rgba(0, 181, 216, 0.2), rgba(237, 137, 54, 0.2));
+      }
+
+      .slide-footer {
+        position: absolute;
+        left: clamp(24px, 3.5vw, 48px);
+        right: clamp(24px, 3.5vw, 48px);
+        bottom: clamp(14px, 2.2vh, 22px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.65rem;
+        color: rgba(74, 85, 104, 0.8);
+        pointer-events: none;
+      }
+
+      .footer-left {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        color: var(--brand-ink-soft);
+      }
+
+      .footer-left img { height: 16px; width: auto; opacity: 0.85; }
+
+      .footer-right {
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-weight: 600;
+      }
+
+      .theme-ink .slide-footer { color: rgba(250, 251, 252, 0.6); }
+      .theme-ink .footer-left { color: rgba(250, 251, 252, 0.75); }
+      .theme-ink .footer-right { color: rgba(250, 251, 252, 0.55); }
+      .theme-ink .footer-left img { filter: brightness(1.15); opacity: 0.9; }
+
+      .input-box {
+        background: var(--brand-paper-deep);
+        border: 1px solid var(--brand-line);
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 0.9rem;
+        line-height: 1.45;
+      }
+
+      .input-box strong {
+        display: block;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--brand-slate);
+        margin-bottom: 6px;
+      }
+
+      .theme-ink .input-box {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .suite-card {
+        border-radius: 14px;
+        border: 1px solid var(--brand-line);
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.7);
+        display: grid;
+        gap: 10px;
+      }
+
+      .suite-card.recommended {
+        border: 2px solid var(--brand-accent);
+        background: rgba(237, 137, 54, 0.05);
+      }
+
+      .suite-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .suite-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .suite-badge {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+        border-radius: 999px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .suite-badge.rec { background: var(--brand-accent); color: white; }
+      .suite-badge.alt { background: var(--brand-paper-deep); color: var(--brand-slate); }
+
+      .suite-engines {
+        font-size: 0.8rem;
+        color: var(--brand-slate);
+        line-height: 1.4;
+      }
+
+      .suite-buyers {
+        font-size: 0.75rem;
+        color: var(--brand-sage);
+        font-weight: 500;
+      }
+
+      .stack-diagram {
+        display: grid;
+        gap: 8px;
+      }
+
+      .stack-diagram.compact .stack-layer {
+        grid-template-columns: 90px 1fr;
+        padding: 8px 12px;
+        font-size: 0.78rem;
+      }
+
+      .stack-diagram.compact .stack-layer-desc {
+        font-size: 0.72rem;
+      }
+      .stack-layer {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 12px;
+        align-items: center;
+        padding: 10px 14px;
+        background: var(--brand-paper-deep);
+        border-radius: 10px;
+        font-size: 0.85rem;
+      }
+
+      .stack-layer-name {
+        font-weight: 600;
+        color: var(--brand-ink);
+      }
+
+      .stack-layer-desc {
+        color: var(--brand-slate);
+        font-size: 0.8rem;
+      }
+
+      .stack-layer.dsm { border-left: 4px solid var(--brand-purple); }
+      .stack-layer.camp { border-left: 4px solid var(--brand-sage); }
+      .stack-layer.turbo { border-left: 4px solid var(--brand-accent); }
+      .stack-layer.s4 { border-left: 4px solid var(--brand-danger); }
+
+      .framing-card {
+        border-radius: 12px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--brand-line);
+      }
+
+      .framing-card.danger { border-left: 4px solid var(--brand-danger); }
+      .framing-card.success { border-left: 4px solid var(--brand-success); }
+
+      .framing-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .framing-label.danger { color: var(--brand-danger); }
+      .framing-label.success { color: var(--brand-success); }
+
+      .framing-text {
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+
+      .gap-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .lock-column {
+        display: grid;
+        gap: 12px;
+      }
+
+      .lock-column.offset-right {
+        margin-top: clamp(140px, 22vh, 200px);
+      }
+
+      .lock-title {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 600;
+      }
+
+      .lock-title.tech { color: var(--brand-sage); }
+      .lock-title.biz { color: var(--brand-accent); }
+
+      .gap-card {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 16px 18px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+        position: relative;
+        overflow: hidden;
+      }
+
+      .gap-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, var(--brand-warning), #b7791f);
+      }
+
+      .gap-card.tech::before { background: linear-gradient(180deg, var(--brand-sage), #0f9ed5); }
+      .gap-card.biz::before { background: linear-gradient(180deg, var(--brand-accent), var(--brand-accent-strong)); }
+
+      .gap-card::after {
+        content: "⚠";
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        font-size: 0.85rem;
+        opacity: 0.4;
+      }
+
+      .gap-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: rgba(250, 251, 252, 0.95);
+        padding-right: 24px;
+      }
+
+      .gap-detail {
+        font-size: 0.78rem;
+        color: rgba(250, 251, 252, 0.6);
+        line-height: 1.45;
+      }
+
+      .bet-table {
+        display: grid;
+        gap: 12px;
+      }
+
+      .timeline {
+        position: relative;
+        display: grid;
+        gap: 12px;
+        padding-left: 26px;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 6px;
+        bottom: 6px;
+        width: 2px;
+        background: var(--brand-line);
+      }
+
+      .timeline-step {
+        position: relative;
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--brand-line);
+        display: grid;
+        gap: 6px;
+      }
+
+      .theme-ink .timeline-step {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .timeline-step::before {
+        content: "";
+        position: absolute;
+        left: -22px;
+        top: 16px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--brand-paper);
+        border: 3px solid var(--brand-sage);
+        box-shadow: 0 0 0 4px rgba(0, 181, 216, 0.15);
+      }
+
+      .timeline-step.science::before { border-color: var(--brand-sage); box-shadow: 0 0 0 4px rgba(0, 181, 216, 0.15); }
+      .timeline-step.biz::before { border-color: var(--brand-accent); box-shadow: 0 0 0 4px rgba(237, 137, 54, 0.15); }
+      .timeline-step.ops::before { border-color: var(--brand-purple); box-shadow: 0 0 0 4px rgba(128, 90, 213, 0.15); }
+      .timeline-step.raise::before { border-color: var(--brand-success); box-shadow: 0 0 0 4px rgba(56, 161, 105, 0.15); }
+
+      .timeline-time {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 600;
+        color: var(--brand-slate);
+      }
+
+      .theme-ink .timeline-time { color: rgba(250, 251, 252, 0.6); }
+
+      .timeline-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--brand-ink);
+      }
+
+      .theme-ink .timeline-title { color: rgba(250, 251, 252, 0.92); }
+
+      .timeline-body {
+        font-size: 0.82rem;
+        color: var(--brand-slate);
+        line-height: 1.4;
+      }
+
+      .theme-ink .timeline-body { color: rgba(250, 251, 252, 0.65); }
+
+      .timeline-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .timeline-tag {
+        font-size: 0.6rem;
+        padding: 2px 6px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+        background: var(--brand-paper-deep);
+        color: var(--brand-slate);
+      }
+
+      .timeline-tag.science { background: rgba(0, 181, 216, 0.2); color: var(--brand-sage); }
+      .timeline-tag.biz { background: rgba(237, 137, 54, 0.2); color: var(--brand-accent); }
+      .timeline-tag.ops { background: rgba(128, 90, 213, 0.2); color: var(--brand-purple); }
+
+      .bet-row {
+        display: grid;
+        grid-template-columns: 1fr 140px 1fr;
+        gap: 16px;
+        padding: 16px 18px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 12px;
+        border: 1px solid var(--brand-line);
+        align-items: start;
+      }
+
+      .bet-hypothesis {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--brand-ink);
+        line-height: 1.4;
+      }
+
+      .bet-source {
+        font-size: 0.78rem;
+        color: var(--brand-slate);
+        text-align: center;
+        padding: 6px 10px;
+        background: var(--brand-paper-deep);
+        border-radius: 6px;
+      }
+
+      .bet-risk {
+        font-size: 0.78rem;
+        color: var(--brand-danger);
+        line-height: 1.4;
+        padding-left: 12px;
+        border-left: 2px solid rgba(229, 62, 62, 0.3);
+      }
+
+      .bet-header {
+        display: grid;
+        grid-template-columns: 1fr 140px 1fr;
+        gap: 16px;
+        padding: 0 18px 8px;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--brand-slate);
+        font-weight: 600;
+      }
+
+      .bet-header span:nth-child(2) { text-align: center; }
+      .bet-header span:nth-child(3) { padding-left: 14px; }
+
+      .problem-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 16px;
+      }
+
+      .problem-stat {
+        text-align: center;
+        padding: 20px 16px;
+        background: linear-gradient(135deg, rgba(229, 62, 62, 0.08), rgba(229, 62, 62, 0.03));
+        border: 1px solid rgba(229, 62, 62, 0.15);
+        border-radius: 14px;
+      }
+
+      .problem-stat-number {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--brand-danger);
+        line-height: 1.1;
+      }
+
+      .problem-stat-label {
+        font-size: 0.78rem;
+        color: var(--brand-slate);
+        margin-top: 6px;
+        line-height: 1.4;
+      }
+
+      .problem-points {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .problem-point {
+        display: flex;
+        gap: 12px;
+        align-items: start;
+        padding: 12px 14px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+        border: 1px solid var(--brand-line);
+      }
+
+      .problem-point::before {
+        content: "✗";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        background: rgba(229, 62, 62, 0.1);
+        color: var(--brand-danger);
+        border-radius: 50%;
+        font-size: 0.7rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .problem-point-text {
+        font-size: 0.85rem;
+        line-height: 1.45;
+        color: var(--brand-ink);
+      }
+
+      .solution-value {
+        display: grid;
+        gap: 14px;
+      }
+
+      .value-card {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding: 18px 20px;
+        background: linear-gradient(135deg, rgba(56, 161, 105, 0.08), rgba(56, 161, 105, 0.03));
+        border: 1px solid rgba(56, 161, 105, 0.15);
+        border-radius: 14px;
+      }
+
+      .value-content {
+        display: grid;
+        gap: 4px;
+      }
+
+      .value-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--brand-success), #2f855a);
+        color: white;
+        border-radius: 12px;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 12px rgba(56, 161, 105, 0.3);
+      }
+
+      .value-person {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--brand-ink);
+      }
+
+      .value-question {
+        font-size: 0.82rem;
+        color: var(--brand-slate);
+        line-height: 1.45;
+      }
+
+      .solution-headline {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--brand-ink);
+        padding: 16px 20px;
+        background: linear-gradient(135deg, rgba(0, 181, 216, 0.1), rgba(0, 181, 216, 0.04));
+        border: 1px solid rgba(0, 181, 216, 0.2);
+        border-radius: 12px;
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      .solution-headline span {
+        color: var(--brand-sage);
+        font-weight: 700;
+      }
+
+      .infra-animation {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .infra-diagram {
+        width: min(520px, 100%);
+        height: auto;
+      }
+
+      .infra-panel {
+        fill: rgba(255, 255, 255, 0.04);
+        stroke: rgba(255, 255, 255, 0.08);
+        stroke-width: 1;
+      }
+
+      .infra-node {
+        fill: rgba(255, 255, 255, 0.08);
+        stroke: rgba(255, 255, 255, 0.22);
+        stroke-width: 1;
+      }
+
+      .infra-node.hub {
+        fill: rgba(0, 181, 216, 0.14);
+        stroke: rgba(0, 181, 216, 0.45);
+        animation: infra-glow 4s ease-in-out infinite;
+      }
+
+      .infra-text {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        fill: rgba(250, 251, 252, 0.92);
+      }
+
+      .infra-text.subtle { font-size: 10px; letter-spacing: 0.14em; fill: rgba(250, 251, 252, 0.6); }
+
+      .infra-line {
+        fill: none;
+        stroke-width: 2;
+        stroke-dasharray: 6 12;
+        opacity: 0.7;
+        animation: infra-flow 6s linear infinite;
+      }
+
+      .infra-line.line-1 { stroke: rgba(0, 181, 216, 0.7); }
+      .infra-line.line-2 { stroke: rgba(237, 137, 54, 0.7); animation-delay: 0.6s; }
+      .infra-line.line-3 { stroke: rgba(128, 90, 213, 0.7); animation-delay: 1.2s; }
+      .infra-line.line-4 { stroke: rgba(56, 161, 105, 0.7); animation-delay: 1.8s; }
+      .infra-line.line-5 { stroke: rgba(0, 181, 216, 0.6); animation-delay: 2.4s; }
+      .infra-line.line-6 { stroke: rgba(237, 137, 54, 0.6); animation-delay: 3s; }
+
+      .infra-orb { opacity: 0.9; }
+      .infra-orb.sage { fill: var(--brand-sage); }
+      .infra-orb.accent { fill: var(--brand-accent); }
+      .infra-orb.purple { fill: var(--brand-purple); }
+      .infra-orb.success { fill: var(--brand-success); }
+
+      @keyframes infra-flow {
+        from { stroke-dashoffset: 0; }
+        to { stroke-dashoffset: -120; }
+      }
+
+      @keyframes infra-glow {
+        0%, 100% { filter: drop-shadow(0 0 0 rgba(0, 181, 216, 0)); }
+        50% { filter: drop-shadow(0 0 12px rgba(0, 181, 216, 0.45)); }
+      }
+
+      .rate-card {
+        display: grid;
+        gap: 0;
+        border: 1px solid var(--brand-line);
+        border-radius: 14px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .rate-header {
+        display: grid;
+        grid-template-columns: 1.2fr 1.5fr 1fr;
+        gap: 0;
+        background: var(--brand-ink);
+        color: white;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+      }
+
+      .rate-header > div {
+        padding: 10px 14px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .rate-header > div:last-child { border-right: none; }
+
+      .rate-row {
+        display: grid;
+        grid-template-columns: 1.2fr 1.5fr 1fr;
+        gap: 0;
+        border-bottom: 1px solid var(--brand-line);
+      }
+
+      .rate-row:last-child { border-bottom: none; }
+
+      .rate-row > div {
+        padding: 10px 14px;
+        border-right: 1px solid var(--brand-line);
+        font-size: 0.78rem;
+        line-height: 1.35;
+      }
+
+      .rate-row > div:last-child { border-right: none; }
+
+      .rate-product {
+        font-weight: 600;
+        color: var(--brand-ink);
+      }
+
+      .rate-product .tier {
+        display: block;
+        font-size: 0.62rem;
+        font-weight: 500;
+        color: var(--brand-slate);
+        margin-top: 1px;
+      }
+
+      .rate-solution {
+        color: var(--brand-slate);
+      }
+
+      .rate-price {
+        background: var(--brand-paper-deep);
+      }
+
+      .rate-price .amount {
+        font-weight: 700;
+        color: var(--brand-accent);
+        display: block;
+      }
+
+      .rate-price .terms {
+        font-size: 0.68rem;
+        color: var(--brand-slate);
+        margin-top: 4px;
+      }
+
+      .rate-row.highlight {
+        background: rgba(237, 137, 54, 0.06);
+      }
+
+      .rate-row.highlight .rate-product {
+        color: var(--brand-accent-strong);
+      }
+
+      .partnership-box {
+        margin-top: 16px;
+        padding: 16px 18px;
+        background: linear-gradient(135deg, rgba(128, 90, 213, 0.08), rgba(128, 90, 213, 0.03));
+        border: 1px solid rgba(128, 90, 213, 0.2);
+        border-radius: 12px;
+      }
+
+      .partnership-box h4 {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--brand-purple);
+        margin: 0 0 10px;
+      }
+
+      .partnership-terms {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .partnership-term {
+        text-align: center;
+      }
+
+      .partnership-term .value {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--brand-purple);
+      }
+
+      .partnership-term .label {
+        font-size: 0.7rem;
+        color: var(--brand-slate);
+        margin-top: 2px;
+      }
+
+      .experiment-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .experiment-card {
+        border-radius: 14px;
+        border: 1px solid var(--brand-line);
+        padding: 18px 20px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+        position: relative;
+        overflow: hidden;
+      }
+
+      .experiment-card::before {
+        content: attr(data-num);
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 48px;
+        height: 48px;
+        background: var(--brand-paper-deep);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--brand-line);
+        opacity: 0.6;
+      }
+
+      .experiment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        gap: 10px;
+      }
+
+      .experiment-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--brand-ink);
+      }
+
+      .experiment-timeline {
+        font-size: 0.68rem;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--brand-sage), #009bb8);
+        color: white;
+        font-weight: 600;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(0, 181, 216, 0.3);
+      }
+
+      .experiment-test {
+        font-size: 0.82rem;
+        color: var(--brand-slate);
+        line-height: 1.5;
+        margin-bottom: 12px;
+      }
+
+      .experiment-signal {
+        font-size: 0.78rem;
+        padding: 10px 12px;
+        background: linear-gradient(135deg, rgba(56, 161, 105, 0.08), rgba(56, 161, 105, 0.04));
+        border: 1px solid rgba(56, 161, 105, 0.2);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .experiment-signal::before {
+        content: "✓";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        background: var(--brand-success);
+        color: white;
+        border-radius: 50%;
+        font-size: 0.65rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .experiment-signal strong { color: var(--brand-success); font-weight: 600; }
+
+      .raise-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .raise-card {
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 22px 18px;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .raise-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--brand-accent), transparent);
+        border-radius: 0 0 4px 4px;
+      }
+
+      .raise-number {
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--brand-accent), #f6ad55);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 4px;
+        line-height: 1.2;
+      }
+
+      .raise-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(250, 251, 252, 0.7);
+        font-weight: 500;
+      }
+
+      .raise-detail {
+        font-size: 0.75rem;
+        color: rgba(250, 251, 252, 0.5);
+        margin-top: 10px;
+        line-height: 1.4;
+        padding-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .theme-ink .raise-card { background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04)); }
+
+      .use-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .use-list li {
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        font-size: 0.82rem;
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        align-items: center;
+        gap: 14px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .use-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--bar-width, 0%);
+        background: linear-gradient(90deg, rgba(237, 137, 54, 0.25), rgba(237, 137, 54, 0.08));
+        border-radius: 10px 0 0 10px;
+      }
+
+      .use-pct {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--brand-accent);
+        position: relative;
+        z-index: 1;
+      }
+
+      .use-list li span:last-child {
+        position: relative;
+        z-index: 1;
+        color: rgba(250, 251, 252, 0.9);
+      }
+
+      .decision-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .decision-item {
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        gap: 12px;
+        align-items: start;
+        padding: 12px 14px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+        border: 1px solid var(--brand-line);
+      }
+
+      .decision-num {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-strong));
+        color: white;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(237, 137, 54, 0.3);
+      }
+
+      .decision-text {
+        font-size: 0.85rem;
+        line-height: 1.45;
+        padding-top: 5px;
+      }
+
+      .decision-text strong {
+        color: var(--brand-ink);
+      }
+
+      .sprint-timeline {
+        display: grid;
+        gap: 0;
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .sprint-timeline::before {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 20px;
+        bottom: 20px;
+        width: 2px;
+        background: linear-gradient(180deg, var(--brand-sage), var(--brand-accent), var(--brand-success));
+        border-radius: 2px;
+      }
+
+      .sprint-phase {
+        position: relative;
+        padding: 14px 16px;
+        padding-left: 24px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+        border: 1px solid var(--brand-line);
+        margin-bottom: 12px;
+      }
+
+      .sprint-phase::before {
+        content: "";
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 14px;
+        height: 14px;
+        background: white;
+        border: 3px solid var(--brand-sage);
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px rgba(0, 181, 216, 0.15);
+      }
+
+      .sprint-phase:nth-child(2)::before { border-color: var(--brand-accent); box-shadow: 0 0 0 4px rgba(237, 137, 54, 0.15); }
+      .sprint-phase:nth-child(3)::before { border-color: var(--brand-success); box-shadow: 0 0 0 4px rgba(56, 161, 105, 0.15); }
+
+      .sprint-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .sprint-phase:nth-child(1) .sprint-label { color: var(--brand-sage); }
+      .sprint-phase:nth-child(2) .sprint-label { color: var(--brand-accent); }
+      .sprint-phase:nth-child(3) .sprint-label { color: var(--brand-success); }
+
+      .sprint-content {
+        font-size: 0.82rem;
+        color: var(--brand-slate);
+        line-height: 1.45;
+      }
+
+      .gantt {
+        display: grid;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .gantt-header,
+      .gantt-row {
+        display: grid;
+        grid-template-columns: 140px repeat(4, 1fr);
+        gap: 10px;
+        align-items: center;
+      }
+
+      .gantt-header {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--brand-slate);
+        font-weight: 600;
+      }
+
+      .gantt-header div { text-align: center; }
+      .gantt-header div:first-child { text-align: left; }
+
+      .gantt-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 600;
+        color: var(--brand-slate);
+      }
+
+      .gantt-label.science { color: var(--brand-sage); }
+      .gantt-label.biz { color: var(--brand-accent); }
+      .gantt-label.ops { color: var(--brand-purple); }
+      .gantt-label.raise { color: var(--brand-success); }
+
+      .gantt-bar {
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--brand-line);
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-size: 0.78rem;
+        line-height: 1.35;
+        box-shadow: 0 6px 16px rgba(26, 26, 46, 0.06);
+      }
+
+      .gantt-bar.science { border-left: 4px solid var(--brand-sage); }
+      .gantt-bar.biz { border-left: 4px solid var(--brand-accent); }
+      .gantt-bar.ops { border-left: 4px solid var(--brand-purple); }
+      .gantt-bar.raise { border-left: 4px solid var(--brand-success); }
+
+      .theme-ink .gantt-header { color: rgba(250, 251, 252, 0.6); }
+      .theme-ink .gantt-bar {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.12);
+        color: rgba(250, 251, 252, 0.82);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        transition-delay: calc(var(--reveal-index, 0) * 0.06s);
+      }
+
+      .slide.is-active .reveal { opacity: 1; transform: translateY(0); }
+
+      .deck-nav {
+        position: fixed;
+        bottom: 3vh;
+        right: 4vw;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(26, 26, 46, 0.85);
+        color: #fafbfc;
+        font-size: 0.9rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+      }
+
+      .deck-nav button {
+        border: none;
+        background: rgba(255, 255, 255, 0.1);
+        color: inherit;
+        padding: 6px 10px;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+
+      .deck-nav button:hover { background: rgba(255, 255, 255, 0.2); }
+
+      .progress { width: 100px; height: 4px; background: rgba(255, 255, 255, 0.12); border-radius: 999px; overflow: hidden; }
+      .progress-bar { height: 100%; background: linear-gradient(90deg, var(--brand-accent), var(--brand-sage)); width: 0%; }
+
+      @media (max-width: 900px) {
+        .deck { height: min(640px, 76vh); }
+        .layout-split, .layout-thirds, .layout-hero { grid-template-columns: 1fr; }
+        .gap-grid, .experiment-row, .raise-grid, .problem-stats { grid-template-columns: 1fr; }
+        .subtitle { max-width: 100%; }
+        .bet-row, .bet-header { grid-template-columns: 1fr; gap: 8px; }
+        .bet-header { display: none; }
+        .bet-source { text-align: left; }
+        .bet-risk { border-left: none; padding-left: 0; padding-top: 8px; border-top: 1px solid rgba(229, 62, 62, 0.2); }
+        .problem-stat { padding: 14px 12px; }
+        .problem-stat-number { font-size: 1.6rem; }
+        .value-card { grid-template-columns: 40px 1fr; gap: 12px; padding: 14px 16px; }
+        .value-icon { width: 40px; height: 40px; font-size: 1.1rem; }
+        .rate-header, .rate-row { grid-template-columns: 1fr; }
+        .rate-header > div, .rate-row > div { border-right: none; border-bottom: 1px solid var(--brand-line); }
+        .rate-header > div:last-child, .rate-row > div:last-child { border-bottom: none; }
+        .rate-header { display: none; }
+        .partnership-terms { grid-template-columns: 1fr; gap: 8px; }
+        .lock-column.offset-right { margin-top: 16px; }
+        .gantt-header { display: none; }
+        .gantt-row { grid-template-columns: 1fr; }
+        .gantt-bar { grid-column: auto !important; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .slide, .reveal { transition: none; }
+        .eyebrow::after { animation: none; }
+      }
+      @page { size: 13.33in 7.5in; margin: 0.35in; }
+      @media print {
+        body { background: #ffffff; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .deck { width: 100%; height: auto; }
+        .slide { position: relative; opacity: 1; transform: none; pointer-events: auto; page-break-after: always; }
+        .slide:last-child { page-break-after: auto; }
+        .slide-inner { border-radius: 0; box-shadow: none; }
+        .deck-nav { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck" id="deck" aria-live="polite">
+
+      <!-- Slide 1: Title -->
+      <section class="slide theme-ivory is-active" data-title="Title">
+        <div class="slide-inner layout-split layout-hero">
+          <div class="hero-copy">
+            <img class="logo reveal" style="--reveal-index: 1" src="resources/assets/synthyra-logo.png" alt="Synthyra" />
+            <p class="eyebrow reveal" style="--reveal-index: 2">Internal Strategy Alignment</p>
+            <h1 class="title title-hero reveal" style="--reveal-index: 3">
+              <span class="title-emphasis">We built</span> the interaction infrastructure for the human proteome.
+            </h1>
+            <p class="subtitle reveal" style="--reveal-index: 4">
+              Proteome-scale interaction maps in real time, powering discovery, safety, and biodefense.
+            </p>
+            <div class="chip-row reveal" style="--reveal-index: 5">
+              <div class="chip accent">Proteome scale</div>
+              <div class="chip sage">Real-time inference</div>
+              <div class="chip muted">Decision layer</div>
+              <div class="chip muted">Pilot ready</div>
+              <div class="chip muted">Integration friendly</div>
+            </div>
+          </div>
+          <div class="hero-media reveal" style="--reveal-index: 4;">
+            <div class="hero-media-frame">
+              <video class="hero-video" autoplay loop muted playsinline poster="resources/assets/slide3-solution.png" data-gen="true" data-prompt="Top-down proteome navigation map, luminous node graph with route lines, subtle grid overlays, teal and amber safety traffic layer, cinematic depth, slow drift, clean biotech aesthetic">
+                <source src="resources/assets/solution-video.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: Messaging -->
+      <section class="slide theme-ivory" data-title="Messaging">
+        <div class="slide-inner layout-split">
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 1">Messaging</p>
+            <h2 class="section-title reveal" style="--reveal-index: 2">How we describe the category.</h2>
+            <div class="input-box reveal" style="--reveal-index: 3; margin-top: 12px; background: rgba(56, 161, 105, 0.08); border-color: var(--brand-success);">
+              <strong>The Hook</strong>
+              "Navigation layer for the proteome, with risk as the traffic layer."
+            </div>
+            <div class="input-box reveal" style="--reveal-index: 4; margin-top: 12px;">
+              <strong>The Positioning</strong>
+              We are the infrastructure layer for interaction intelligence across discovery, safety, and biodefense.
+            </div>
+            <div class="input-box reveal" style="--reveal-index: 5; margin-top: 12px;">
+              <strong>The Wedge</strong>
+              Safety and Toxicity pilot: single asset, data-in/data-out, 30-60 days, builds expansion path.
+            </div>
+          </div>
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 2">Questions Buyers Can Now Ask</p>
+            <div class="solution-value reveal" style="--reveal-index: 3; margin-top: 12px;">
+              <div class="value-card">
+                <div class="value-icon">🔍</div>
+                <div class="value-content">
+                  <div class="value-person">Tox Lead</div>
+                  <div class="value-question">"Which compounds are likely to fail Phase I before we run it?"</div>
+                </div>
+              </div>
+              <div class="value-card">
+                <div class="value-icon">🧬</div>
+                <div class="value-content">
+                <div class="value-person">Discovery Lead</div>
+                <div class="value-question">"Which candidates should we advance with confidence?"</div>
+              </div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">⚗️</div>
+              <div class="value-content">
+                <div class="value-person">Safety Lead</div>
+                <div class="value-question">"What interactions create toxicity risk before trials?"</div>
+              </div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">🦠</div>
+              <div class="value-content">
+                <div class="value-person">Biodefense Lead</div>
+                <div class="value-question">"How fast can we map host-pathogen interactions?"</div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Engine + Stack -->
+      <section class="slide theme-ink" data-title="Engine">
+        <div class="slide-inner layout-split">
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 1">The Engine</p>
+            <h2 class="section-title reveal" style="--reveal-index: 2">Infrastructure-level capability, product-ready suites.</h2>
+            <p class="body-text reveal" style="--reveal-index: 3">
+              Single protein vs proteome in under 1 second. Full human interactome in about 2 hours. Flow: ingest → annotate → infer → decide.
+            </p>
+            <div class="solution-headline reveal" style="--reveal-index: 4">
+              <span>Single protein vs proteome under 1s.</span> Full human interactome ~2 hours.
+            </div>
+            <div class="stack-diagram compact reveal" style="--reveal-index: 5; margin-top: 12px;">
+              <div class="stack-layer dsm">
+                <span class="stack-layer-name">Ingest</span>
+                <span class="stack-layer-desc">Sequence + target context</span>
+              </div>
+              <div class="stack-layer camp">
+                <span class="stack-layer-name">Annotate</span>
+                <span class="stack-layer-desc">Functional context + metadata</span>
+              </div>
+              <div class="stack-layer turbo">
+                <span class="stack-layer-name">Infer</span>
+                <span class="stack-layer-desc">Proteome-scale interaction engine</span>
+              </div>
+              <div class="stack-layer s4">
+                <span class="stack-layer-name">Decide</span>
+                <span class="stack-layer-desc">Risk ranking + recommendations</span>
+              </div>
+            </div>
+          </div>
+          <div class="infra-animation reveal" style="--reveal-index: 2;">
+            <svg class="infra-diagram" viewBox="0 0 520 320" role="img" aria-label="Integrated infrastructure flow">
+              <rect class="infra-panel" x="20" y="30" width="480" height="260" rx="24" />
+              <text class="infra-text subtle" x="48" y="60">INTEGRATED FLOW</text>
+
+              <rect class="infra-node" x="40" y="90" width="140" height="44" rx="12" />
+              <text class="infra-text" x="58" y="118">INGEST</text>
+              <rect class="infra-node" x="40" y="150" width="140" height="44" rx="12" />
+              <text class="infra-text" x="58" y="178">ANNOTATE</text>
+
+              <rect class="infra-node" x="210" y="90" width="140" height="44" rx="12" />
+              <text class="infra-text" x="228" y="118">INFER</text>
+              <rect class="infra-node" x="210" y="150" width="140" height="44" rx="12" />
+              <text class="infra-text" x="228" y="178">RANK</text>
+
+              <rect class="infra-node hub" x="370" y="115" width="120" height="70" rx="18" />
+              <text class="infra-text" x="388" y="153">DECISION</text>
+
+              <path class="infra-line line-1" d="M180 112 L210 112" />
+              <path class="infra-line line-2" d="M180 112 C200 112 200 172 210 172" />
+              <path class="infra-line line-3" d="M180 172 C200 172 200 112 210 112" />
+              <path class="infra-line line-4" d="M180 172 L210 172" />
+              <path class="infra-line line-5" d="M350 112 C360 112 360 150 370 150" />
+              <path class="infra-line line-6" d="M350 172 C360 172 360 150 370 150" />
+
+              <circle class="infra-orb sage" r="4">
+                <animateMotion dur="5s" repeatCount="indefinite" path="M180 112 L210 112 L350 112 C360 112 360 150 370 150" />
+              </circle>
+              <circle class="infra-orb accent" r="4">
+                <animateMotion dur="5.6s" repeatCount="indefinite" path="M180 172 L210 172 L350 172 C360 172 360 150 370 150" />
+              </circle>
+              <circle class="infra-orb purple" r="4">
+                <animateMotion dur="6.2s" repeatCount="indefinite" path="M180 112 C200 112 200 172 210 172 L350 172 C360 172 360 150 370 150" />
+              </circle>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: Wedge -->
+      <section class="slide theme-ivory" data-title="Wedge">
+        <div class="slide-inner layout-split">
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 1">The Wedge</p>
+            <h2 class="section-title reveal" style="--reveal-index: 2">Safety & Toxicity is the entry point.</h2>
+            <p class="body-text reveal" style="--reveal-index: 3">
+              Same platform, different entry points. Each suite targets a specific buyer and use case.
+            </p>
+            <div class="input-box reveal" style="--reveal-index: 4; margin-top: 16px;">
+              <strong>Recommended Entry</strong>
+              Start with Safety and Toxicity — single asset, data-in/data-out, 30-60 days, builds credibility for expansion.
+            </div>
+            <div class="input-box reveal" style="--reveal-index: 5; margin-top: 12px;">
+              <strong>GTM Motion</strong>
+              Pilot-first, integration-friendly now; expand to multi-suite licensing after proof.
+            </div>
+          </div>
+          <div class="reveal" style="--reveal-index: 3">
+            <div style="display: grid; gap: 14px;">
+              <div class="suite-card recommended">
+                <div class="suite-header">
+                  <span class="suite-title">Safety & Toxicity</span>
+                  <span class="suite-badge rec">Recommended Entry</span>
+                </div>
+                <div class="suite-engines">"Map off-target risk and toxicity signals before expensive studies"</div>
+                <div class="suite-buyers">Buyers: Safety and tox leaders, translational teams</div>
+              </div>
+              <div class="suite-card">
+                <div class="suite-header">
+                  <span class="suite-title">Drug Discovery</span>
+                  <span class="suite-badge alt">Alternative</span>
+                </div>
+                <div class="suite-engines">"Prioritize leads and surface off-target risks in parallel"</div>
+                <div class="suite-buyers">Buyers: Discovery heads, comp bio, platform leads</div>
+              </div>
+              <div class="suite-card">
+                <div class="suite-header">
+                  <span class="suite-title">Biodefense</span>
+                  <span class="suite-badge alt">Alternative</span>
+                </div>
+                <div class="suite-engines">"Map host-pathogen interactions in hours for rapid countermeasures"</div>
+                <div class="suite-buyers">Buyers: DARPA, BARDA, DoD, pandemic response</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5: Stakes -->
+      <section class="slide theme-ivory" data-title="Stakes">
+        <div class="slide-inner layout-split">
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 1">The Stakes</p>
+            <h2 class="section-title reveal" style="--reveal-index: 2">Proof packaging is the gate.</h2>
+            <p class="body-text reveal" style="--reveal-index: 3">
+              We have speed and early validation. Packaged benchmarks and a pilot convert trust into revenue.
+            </p>
+            <div class="framing-card danger reveal" style="--reveal-index: 4; margin-top: 12px;">
+              <div class="framing-label danger">Risk</div>
+              <div class="framing-text">Without packaged proof, speed is just a claim.</div>
+            </div>
+            <div class="framing-card success reveal" style="--reveal-index: 5; margin-top: 12px;">
+              <div class="framing-label success">Opportunity</div>
+              <div class="framing-text">Close proof gates and pilots move fast.</div>
+            </div>
+          </div>
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 2">Alignment Decisions</p>
+            <div class="reveal" style="--reveal-index: 3; display: grid; gap: 12px; margin-top: 12px;">
+              <div class="input-box">
+                <strong>Wedge we lead with</strong>
+                Safety and Toxicity pilot, single asset, data-in/data-out.
+              </div>
+              <div class="input-box">
+                <strong>Validation bar</strong>
+                Precision-at-K benchmark figure + retrospective case study.
+              </div>
+              <div class="input-box">
+                <strong>Pilot target</strong>
+                J&amp;J plus one backup target with case study rights.
+              </div>
+            </div>
+          </div>
+          <img class="nano-banana-strip reveal" style="--reveal-index: 6" src="resources/assets/nano-banana-strip.svg" alt="Proteome navigation strip" data-gen="true" data-prompt="Horizontal nano-banana banner, proteome interaction map with connected nodes and route lines, safety risk overlay, teal and amber glow, clean biotech aesthetic, wide panoramic composition" />
+        </div>
+      </section>
+
+      <!-- Slide 6: Pricing -->
+      <section class="slide theme-ivory" data-title="Pricing">
+        <div class="slide-inner layout-stack">
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 1">The Deal</p>
+            <h2 class="section-title reveal" style="--reveal-index: 2">Pilot pricing that preserves enterprise value.</h2>
+          </div>
+          <div class="reveal" style="--reveal-index: 3">
+            <div class="rate-card">
+              <div class="rate-header">
+                <div>Engagement</div>
+                <div>What They Get</div>
+                <div>Investment</div>
+              </div>
+              <div class="rate-row highlight">
+                <div class="rate-product">Validation Pilot<span class="tier">Recommended entry</span></div>
+                <div class="rate-solution">Single asset, data-in/data-out. Proteome risk map + ranked off-targets. Optional limited lab confirmation. 30-60 days.</div>
+                <div class="rate-price"><span class="amount">Target &lt;$200K</span><span class="terms">Director-level approval</span></div>
+              </div>
+              <div class="rate-row">
+                <div class="rate-product">Suite License<span class="tier">Post-pilot</span></div>
+                <div class="rate-solution">Multi-program access. Safety/Tox + next suite. API access and renewal path.</div>
+                <div class="rate-price"><span class="amount">$500K-1.5M/yr</span><span class="terms">Annual, multi-program</span></div>
+              </div>
+              <div class="rate-row">
+                <div class="rate-product">Usage Add-On<span class="tier">Per compound</span></div>
+                <div class="rate-solution">Additional compound-program credits beyond the base platform access.</div>
+                <div class="rate-price"><span class="amount">$500-1,000</span><span class="terms">Tiered by volume</span></div>
+              </div>
+              <div class="rate-row">
+                <div class="rate-product">Enterprise Infrastructure<span class="tier">Platform</span></div>
+                <div class="rate-solution">Multi-suite license, integration support, reference libraries, enterprise support.</div>
+                <div class="rate-price"><span class="amount">$5M-15M/yr</span><span class="terms">Platform license + integration</span></div>
+              </div>
+            </div>
+            <div class="partnership-box">
+              <h4>Critical Deal Terms (Non-Negotiables)</h4>
+              <div class="partnership-terms">
+                <div class="partnership-term">
+                  <div class="value">Case study</div>
+                  <div class="label">Named or quotable reference</div>
+                </div>
+                <div class="partnership-term">
+                  <div class="value">Data rights</div>
+                  <div class="label">Retain anonymized training access</div>
+                </div>
+                <div class="partnership-term">
+                  <div class="value">Expansion</div>
+                  <div class="label">Pre-negotiated pricing + scope</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7: Reveal -->
+      <section class="slide theme-ink" data-title="Reveal">
+        <div class="slide-inner layout-split">
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 1">The Reveal</p>
+            <h2 class="section-title reveal" style="--reveal-index: 2">We raise on tech and proof - proof is the gate.</h2>
+            <p class="body-text reveal" style="--reveal-index: 3">
+              Proof means external validation that turns speed into trust. Science proof on the left, business proof on the right.
+            </p>
+            <div class="lock-column reveal" style="--reveal-index: 4; margin-top: 16px;">
+              <div class="lock-title tech">Science + Tech Proof</div>
+              <div class="gap-card tech">
+              <div class="gap-title">Benchmark figure locked</div>
+                <div class="gap-detail">Precision-at-K figure using BioGRID, IntAct, STRING benchmarks.</div>
+              </div>
+              <div class="gap-card tech">
+                <div class="gap-title">Retrospective off-target case study</div>
+                <div class="gap-detail">Public withdrawal or known toxicity signals mapped to predicted interactions.</div>
+              </div>
+              <div class="gap-card tech">
+                <div class="gap-title">Prospective pilot validation</div>
+                <div class="gap-detail">Limited lab confirmation to anchor trust on a live asset.</div>
+              </div>
+            </div>
+          </div>
+          <div class="lock-column offset-right reveal" style="--reveal-index: 4;">
+            <div class="lock-title biz">Business Proof</div>
+            <div class="gap-card biz">
+              <div class="gap-title">Signed pilot with recognizable pharma</div>
+              <div class="gap-detail">Single-asset pilot with case study rights (J&amp;J target).</div>
+            </div>
+            <div class="gap-card biz">
+              <div class="gap-title">Integration PoC</div>
+              <div class="gap-detail">Benchling or Certara workflow proof to reduce adoption friction.</div>
+            </div>
+            <div class="gap-card biz">
+              <div class="gap-title">Narrative + pricing aligned</div>
+              <div class="gap-detail">Suite naming, pilot scope, and enterprise pricing locked.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8: Plan -->
+      <section class="slide theme-ivory" data-title="Plan">
+        <div class="slide-inner layout-stack">
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 1">The Plan</p>
+            <h2 class="section-title reveal" style="--reveal-index: 2">Parallel execution to pilot and raise.</h2>
+            <p class="body-text reveal" style="--reveal-index: 3">
+              Proof gates stay sequenced while science, BD, and internal tracks run in parallel.
+            </p>
+          </div>
+          <div class="gantt reveal" style="--reveal-index: 4;">
+            <div class="gantt-header">
+              <div>Track</div>
+              <div>Month 0-2</div>
+              <div>Month 2-4</div>
+              <div>Month 4-6</div>
+              <div>Month 6</div>
+            </div>
+            <div class="gantt-row">
+              <div class="gantt-label science">Science</div>
+              <div class="gantt-bar science" style="grid-column: 2 / 3;">Precision-at-K benchmark + retrospective case study</div>
+              <div class="gantt-bar science" style="grid-column: 3 / 4;">Pilot validation support</div>
+              <div class="gantt-bar science" style="grid-column: 4 / 5;">Selective publication package</div>
+            </div>
+            <div class="gantt-row">
+              <div class="gantt-label biz">BD</div>
+              <div class="gantt-bar biz" style="grid-column: 2 / 3;">J&amp;J pilot scope + second pharma target</div>
+              <div class="gantt-bar biz" style="grid-column: 3 / 4;">Pilot signed + case study rights</div>
+              <div class="gantt-bar biz" style="grid-column: 4 / 5;">DARPA/BARDA proposal package</div>
+            </div>
+            <div class="gantt-row">
+              <div class="gantt-label ops">Internal</div>
+              <div class="gantt-bar ops" style="grid-column: 2 / 3;">Suite naming + pilot scope doc</div>
+              <div class="gantt-bar ops" style="grid-column: 3 / 4;">Integration PoC (Benchling/Certara)</div>
+              <div class="gantt-bar ops" style="grid-column: 4 / 5;">Packaging + enterprise pricing</div>
+            </div>
+            <div class="gantt-row">
+              <div class="gantt-label raise">Raise</div>
+              <div class="gantt-bar raise" style="grid-column: 2 / 5;">VC narrative + data room</div>
+              <div class="gantt-bar raise" style="grid-column: 5 / 6;">Close</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 9: Payout -->
+      <section class="slide theme-ink" data-title="Payout">
+        <div class="slide-inner layout-split">
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 1">The Payout</p>
+            <h2 class="section-title reveal" style="--reveal-index: 2">What the raise unlocks.</h2>
+            <div class="raise-grid reveal" style="--reveal-index: 3; margin-top: 20px;">
+              <div class="raise-card">
+                <div class="raise-number">$12-18M</div>
+                <div class="raise-label">Target Raise</div>
+                <div class="raise-detail">24-month runway<br/>Pilot + validation delivery</div>
+              </div>
+              <div class="raise-card">
+                <div class="raise-number">$40-50M</div>
+                <div class="raise-label">Post-Money</div>
+                <div class="raise-detail">Series Seed positioning<br/>Reasonable dilution</div>
+              </div>
+              <div class="raise-card">
+                <div class="raise-number">6 mo</div>
+                <div class="raise-label">Timeline</div>
+                <div class="raise-detail">Warm VC relationships now<br/>Close within 6 months</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="eyebrow reveal" style="--reveal-index: 2; margin-top: 8px;">Use of Funds</p>
+            <ul class="use-list reveal" style="--reveal-index: 3; margin-top: 14px;">
+              <li style="--bar-width: 35%"><span class="use-pct">35%</span><span>Engineering — platform hardening, integration PoC</span></li>
+              <li style="--bar-width: 25%"><span class="use-pct">25%</span><span>Validation — benchmarks, case studies, pilot support</span></li>
+              <li style="--bar-width: 25%"><span class="use-pct">25%</span><span>BD/Sales — pilot execution, partnerships</span></li>
+              <li style="--bar-width: 15%"><span class="use-pct">15%</span><span>Ops — team expansion, legal, G&A</span></li>
+            </ul>
+            <div class="input-box reveal" style="--reveal-index: 4; margin-top: 18px;">
+              <strong>Why $12-18M?</strong>
+              Covers pilots, validation, and integration. Below $12M risks delays; above $18M dilutes focus.
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <nav class="deck-nav" aria-label="Slide navigation">
+      <button id="prev-btn" type="button" aria-label="Previous slide">&larr;</button>
+      <div class="progress" aria-hidden="true">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div id="progress-count">1 / 11</div>
+      <button id="next-btn" type="button" aria-label="Next slide">&rarr;</button>
+    </nav>
+
+    <script src="../brands.js"></script>
+    <script src="./deck-config.js"></script>
+    <script>
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const footerMarkup = `
+        <div class="footer-left">
+          <img src="resources/assets/synthyra-logo.png" alt="Synthyra" />
+          <span>Synthyra</span>
+        </div>
+        <div class="footer-right">Confidential</div>
+      `;
+
+      document.querySelectorAll(".slide-inner").forEach((slideInner) => {
+        if (slideInner.querySelector(".slide-footer")) return;
+        const footer = document.createElement("div");
+        footer.className = "slide-footer";
+        footer.innerHTML = footerMarkup;
+        slideInner.appendChild(footer);
+      });
+
+      const progressBar = document.getElementById("progress-bar");
+      const progressCount = document.getElementById("progress-count");
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+      let currentIndex = slides.findIndex((s) => s.classList.contains("is-active"));
+      if (currentIndex < 0 && slides.length) { currentIndex = 0; slides[0].classList.add("is-active"); }
+
+      const updateProgress = () => {
+        const pct = slides.length ? ((currentIndex + 1) / slides.length) * 100 : 0;
+        progressBar.style.width = `${pct}%`;
+        progressCount.textContent = `${currentIndex + 1} / ${slides.length}`;
+      };
+
+      const showSlide = (index) => {
+        if (index < 0 || index >= slides.length) return;
+        slides[currentIndex]?.classList.remove("is-active");
+        currentIndex = index;
+        slides[currentIndex].classList.add("is-active");
+        updateProgress();
+        const slug = slides[currentIndex].dataset.title || `slide-${currentIndex + 1}`;
+        history.replaceState(null, "", `#${slug.toLowerCase().replace(/\s+/g, "-")}`);
+      };
+
+      const nextSlide = () => showSlide(currentIndex + 1);
+      const prevSlide = () => showSlide(currentIndex - 1);
+
+      prevBtn.addEventListener("click", prevSlide);
+      nextBtn.addEventListener("click", nextSlide);
+
+      document.addEventListener("keydown", (e) => {
+        if (["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
+        if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); nextSlide(); }
+        if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); prevSlide(); }
+        if (e.key === "Home") { e.preventDefault(); showSlide(0); }
+        if (e.key === "End") { e.preventDefault(); showSlide(slides.length - 1); }
+      });
+
+      let touchStartX = 0;
+      document.addEventListener("touchstart", (e) => { touchStartX = e.changedTouches[0].clientX; });
+      document.addEventListener("touchend", (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) < 50) return;
+        dx < 0 ? nextSlide() : prevSlide();
+      });
+
+      const gotoFromHash = () => {
+        const hash = window.location.hash.replace("#", "").trim();
+        if (!hash) return;
+        const idx = slides.findIndex((s) => {
+          const t = s.dataset.title || "";
+          return t.toLowerCase().replace(/\s+/g, "-") === hash;
+        });
+        if (idx >= 0) showSlide(idx);
+      };
+
+      window.addEventListener("hashchange", gotoFromHash);
+      updateProgress();
+      gotoFromHash();
+    </script>
+  </body>
+</html>
