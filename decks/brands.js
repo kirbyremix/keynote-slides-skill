@@ -1,8 +1,66 @@
 // ABOUTME: Shared brand profiles for keynote decks in this repo.
 // ABOUTME: Loaded by deck HTML to keep entity styling consistent.
 
-// These are example brand profiles. Replace with your own brand identities.
+// Brand profiles for keynote decks.
+// Remix Partners is the primary brand; example brands follow.
 window.KEYNOTE_BRANDS = {
+  remix: {
+    label: "Remix Partners",
+    tokens: {
+      "brand-ink": "#1D1D1C",
+      "brand-ink-soft": "#3a3a39",
+      "brand-paper": "#FFFFFF",
+      "brand-paper-deep": "#f2f3f5",
+      "brand-accent": "#E0F61F",
+      "brand-accent-strong": "#c8db00",
+      "brand-sage": "#5D6E96",
+      "brand-slate": "#A77E5A",
+      "brand-line": "rgba(29, 29, 28, 0.12)",
+      "brand-glow": "rgba(224, 246, 31, 0.35)",
+    },
+    // Extended palette (available for per-slide overrides and AI prompts)
+    extendedTokens: {
+      "brand-mauve": "#A04473",
+      "brand-mauve-light": "#CEBAB3",
+      "brand-sage-light": "#DEE2EB",
+      "brand-slate-light": "#C1B59C",
+      "brand-purple": "#AD8FFF",
+    },
+    fonts: {
+      display: "\"Archivo Narrow\", \"Helvetica Neue\", \"Arial Narrow\", sans-serif",
+      body: "\"DM Sans\", \"Helvetica Neue\", \"Segoe UI\", sans-serif",
+      mono: "\"DM Mono\", \"Roboto Mono\", monospace",
+    },
+    fontLabel: "Display: Archivo Narrow. Body: DM Sans. Mono: DM Mono.",
+    mediaPromptPrefix: "dark modern palette, neon chartreuse (#E0F61F) accents on near-black (#1D1D1C) backgrounds, organic gradient blobs, ambient morphing shapes, dusty blue and warm bronze secondary tones, clean minimal composition, premium tech consulting aesthetic",
+    defaultDeckType: "pitch",
+    deckPreferences: {
+      pitch: {
+        voice: "confident but not salesy, specific but not overcommitted, strategic but practical",
+        headlineStyle: "clear value proposition, outcome-focused, no hype language",
+        narrative: ["Context", "Challenge", "Approach", "Proof", "Next Steps"],
+        density: "low",
+        visualFocus: "hero visual + single insight per slide",
+        avoid: ["hype language", "empty superlatives", "vague promises", "dense paragraphs"],
+      },
+      strategy: {
+        voice: "direct, evidence-focused, respectful of client intelligence",
+        headlineStyle: "clear verdicts with concrete next steps",
+        narrative: ["Situation", "Analysis", "Recommendation", "Roadmap"],
+        density: "medium",
+        visualFocus: "tables, timelines, process maps",
+        avoid: ["jargon stacks", "unactionable recommendations", "quantified impact claims"],
+      },
+      workshop: {
+        voice: "engaging, practical, hands-on",
+        headlineStyle: "action-oriented, what participants will do",
+        narrative: ["Foundation", "Demonstration", "Practice", "Application"],
+        density: "medium-low",
+        visualFocus: "diagrams, step-by-step flows, interactive prompts",
+        avoid: ["hour-by-hour breakdowns", "walls of text", "passive descriptions"],
+      },
+    },
+  },
   northwind: {
     label: "Northwind Labs",
     tokens: {
@@ -109,4 +167,4 @@ window.KEYNOTE_BRANDS = {
   },
 };
 
-window.KEYNOTE_DEFAULT_ENTITY = "northwind";
+window.KEYNOTE_DEFAULT_ENTITY = "remix";
