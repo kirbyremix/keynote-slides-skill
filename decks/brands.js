@@ -27,12 +27,12 @@ window.KEYNOTE_BRANDS = {
       "brand-purple": "#AD8FFF",
     },
     fonts: {
-      display: "\"Archivo Narrow\", \"Helvetica Neue\", \"Arial Narrow\", sans-serif",
-      body: "\"DM Sans\", \"Helvetica Neue\", \"Segoe UI\", sans-serif",
-      mono: "\"DM Mono\", \"Roboto Mono\", monospace",
+      display: "\"Studio Feixen Edgy\", \"Arial\", sans-serif",
+      body: "\"Studio Feixen Sans\", \"Arial\", sans-serif",
+      mono: "\"Studio Feixen Mono\", \"Roboto Mono\", monospace",
     },
-    fontLabel: "Display: Archivo Narrow. Body: DM Sans. Mono: DM Mono.",
-    mediaPromptPrefix: "dark modern palette, neon chartreuse (#E0F61F) accents on near-black (#1D1D1C) backgrounds, organic gradient blobs, ambient morphing shapes, dusty blue and warm bronze secondary tones, clean minimal composition, premium tech consulting aesthetic",
+    fontLabel: "Display: Studio Feixen Edgy. Headings/Body: Studio Feixen Sans. CTAs/Mono: Studio Feixen Mono.",
+    mediaPromptPrefix: "3D rendered minimalist scene, warm bronze and beige tones, soft pink and mauve accents, clean minimal composition, wide angle, warm ambient lighting, gradient background in soft pink-to-purple or warm neutral hues, contemplative serene atmosphere, premium consulting aesthetic",
     defaultDeckType: "pitch",
     deckPreferences: {
       pitch: {
